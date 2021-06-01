@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Oswald&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper" id="headerWrapper">
+            <div id="logo">Library</div>
+            <div id="spacer"></div>
+
+        </div>
+    </header>
+
+    <div id="popupScreen">
+        <div id="popupBox">
+            <div class="title">New Book</div>
+            <form id="popupForm">
+                <input class="formElement" id="newTitle" type="text" placeholder="Title" autocomplete="off">
+                <input class="formElement" id="newAuthor" type="text" placeholder="Author" autocomplete="off">
+                <input class="formElement" id="newPages" type="text" placeholder="Page number" autocomplete="off">
+                <label class="formElement newRead" for="newRead">Check if read</label>
+                <input class="formElement newRead" id="checkbox" type="checkbox" name="read">
+                <button type="button" id="add" class="formElement button" onclick="getInput()">Add</button>
+                <button type="button" id="close" class="formElement button" onclick="closePop()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="grid"></div>
+
+    <script src="library.js"></script>
+</body>
+
+</html>
