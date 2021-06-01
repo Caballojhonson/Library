@@ -45,7 +45,7 @@ function makeCard(i) {
     const checkbox = document.createElement('input')
 
     bookDelete.classList.add('bookAttr', 'deleteButton');
-    bookDelete.setAttribute('src', '/icons/remove.png');
+    bookDelete.setAttribute('src', 'icons/remove.png');
     bookDelete.setAttribute('onclick', 'removeBook(this)')
     bookCard.setAttribute('data-index', i);
     bookCard.classList.add('bookCard');
@@ -96,7 +96,7 @@ function resetGrid() {
     newContainer.id = 'newContainer';
     newBtn.id = 'addNew';
     newContainer.setAttribute('onclick', 'openPop()')
-    newBtn.setAttribute('src', '/icons/add.png')
+    newBtn.setAttribute('src', 'icons/add.png')
 
     grid.appendChild(newContainer);
     newContainer.appendChild(newBtn);
