@@ -36,7 +36,7 @@ function makeCard(i) {
 
     const bookGrid = document.getElementById('grid');
 
-    const bookDelete = document.createElement('button')
+    const bookDelete = document.createElement('img')
     const bookCard = document.createElement('div');
     const bookTitle = document.createElement('div');
     const bookAuthor = document.createElement('div');
@@ -45,9 +45,9 @@ function makeCard(i) {
     const checkbox = document.createElement('input')
 
     bookDelete.classList.add('bookAttr', 'deleteButton');
-    bookCard.setAttribute('data-index', i);
-    bookDelete.setAttribute('type', 'button');
+    bookDelete.setAttribute('src', '/icons/remove.png');
     bookDelete.setAttribute('onclick', 'removeBook(this)')
+    bookCard.setAttribute('data-index', i);
     bookCard.classList.add('bookCard');
     bookTitle.classList.add('bookAttr');
     bookTitle.id = 'bookTitle';
@@ -58,7 +58,6 @@ function makeCard(i) {
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('onclick', 'isRead(this)')
 
-    bookDelete.textContent = 'x';
     bookTitle.textContent = library[i].title;
     bookAuthor.textContent = ('Written by ' + library[i].author);
     bookPages.textContent = library[i].pages + ' pages long';
@@ -82,19 +81,22 @@ function populateGrid() {
     for (let i = 0; i < library.length; i++) {
         makeCard(i);
     }
+    const newContainer = document.getElementById('newContainer');
+    document.getElementById('grid').appendChild(newContainer);
 }
 
 function resetGrid() {
+
     document.getElementById('grid').innerHTML = '';
 
     const newContainer = document.createElement('div');
-    const newBtn = document.createElement('div');
-    const grid = document.getElementById('grid')
+    const newBtn = document.createElement('img');
+    const grid = document.getElementById('grid');
 
     newContainer.id = 'newContainer';
     newBtn.id = 'addNew';
-    newBtn.setAttribute('onclick', 'openPop()')
-    newBtn.textContent = '+';
+    newContainer.setAttribute('onclick', 'openPop()')
+    newBtn.setAttribute('src', '/icons/add.png')
 
     grid.appendChild(newContainer);
     newContainer.appendChild(newBtn);

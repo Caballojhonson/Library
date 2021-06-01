@@ -1,8 +1,12 @@
+
+/* @media screen and (min-width: 900px) { */
 body, html{
+    position: absolute;
     margin: 0px;
     padding: 0px;
-    height: 100%;
+    width:100vw;
     font-family: 'Abel', sans-serif;
+    font-size: 1rem;
 }
 .title {
     padding: 20px;
@@ -28,22 +32,24 @@ body, html{
 #grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin: 50px 150px 50px 150px;
-    min-height: 30%;
+    margin: 3.12rem 9.375rem 20rem 9.375rem;
     column-gap: 10%;
     row-gap: 5%;
 }
 .bookCard, #newContainer {
     display: flex;
     flex-wrap: wrap;
-    padding: 10%;
-    min-height: 30%;
+    padding: 1.2rem;
+    height: 19rem;
+    width: 15rem;
     border: 1px solid lightgray;
     border-radius: 3%;
     background-color: rgb(255, 255, 244);
 }
 #newContainer {
     justify-content: center;
+    /* grid-column-end: -1; */
+    /* grid-row-end: 5; */
 }
 #addNew {
     display: flex;
@@ -52,21 +58,19 @@ body, html{
     align-self: center;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgb(76, 93, 107);
-    border-radius: 25%;
     font-size: 70px;
     color: rgb(76, 93, 107);
+    cursor:pointer;
 }
 .bookAttr {
     padding-bottom: 5%;
     display: flex;
     width: 100%;
-    justify-content: start;
+
 }
 #bookTitle {
     justify-content: center;
-    text-align: center;
-    font-size: 30px;
+    font-size: 1.8rem;
     font-family: 'Oswald', sans-serif;
 }
 #popupScreen {
@@ -76,7 +80,7 @@ body, html{
     background-color: rgba(211, 211, 211, 0.712);
     justify-content: center;
     height: 100%;
-    width:100%;
+    width: 100%;
     z-index: 10;
 }
 #popupBox {
@@ -129,19 +133,31 @@ body, html{
     background-color: rgb(248, 192, 192);
 }
 .deleteButton {
-    width: 10px;
-    height: 10px;
+    width: 1.2rem;
+    height: 1.2rem;
     position: relative;
-    left: 90%;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    font-size: 20px;
+    left: 13.3rem;
+    bottom: 0.7rem;
+    cursor: pointer;
 }
 .deleteButton:hover {
-    color: red;
+    transform: scale(20%) ;
 }
 .deleteButton:focus {
     outline: none;
+}
+
+/* } */
+@media screen and (max-width: 26.563rem) {
+
+    body, html {
+    font-size: 10px;
+    }
+    #grid {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 2rem;
+        column-gap: 2rem;
+        margin: auto 1rem 5rem 1rem;
+
+    }
 }
