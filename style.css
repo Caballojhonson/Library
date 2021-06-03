@@ -12,22 +12,6 @@ body, html{
     font-size: xx-large;
     font-family: 'Oswald', sans-serif;
 }
-#headerWrapper {
-    display: flex;
-    padding-right: 10%;
-    padding-left: 5%;
-    height: auto;
-    background-color:rgb(227, 238, 238);
-}
-#logo {
-    display: flex;
-    align-self: center;
-}
-#spacer {
-    display:flex;
-    flex-grow: 4;
-}
-
 #grid {
     display: inline-flex;
     flex-wrap: wrap;
@@ -60,8 +44,8 @@ body, html{
     cursor:pointer;
 }
 .bookAttr {
+    display: inline-block;
     padding-bottom: 5%;
-    display: flex;
     width: 100%;
 
 }
@@ -70,6 +54,7 @@ body, html{
     font-size: 1.8rem;
     font-family: 'Oswald', sans-serif;
     text-align: center;
+    margin-top: -1rem;
 }
 #popupScreen {
     position: fixed;
@@ -155,23 +140,23 @@ body, html{
     body, html {
     font-size: 11px;
     }
-    /* #grid {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 2rem;
-        column-gap: 2rem;
-        margin: auto 1rem 5rem 1rem;
-    } */
     #popupBox {
         width: 80%;
     }
-    /* .bookCard, #newContainer {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 1.2rem;
-        height: 19rem;
-        width: 12rem;
-        border: 1px solid lightgray;
-        border-radius: 3%;
-        background-color: rgb(255, 255, 244);
-    } */
+    #grid {
+        padding: 2.5rem 0rem 2.5rem 1rem; 
+    }
+    .bookCard, #newContainer {
+        padding: 1rem;
+        height: 13rem;
+        width: 9rem;
+        margin: 0rem 1rem 1rem 0rem;
+    }
+    #bookTitle {
+        font-size: 1.4rem;
+    }
+    .deleteButton {
+        left: 8.2rem;
+        bottom: 0.3rem;
+    }
 }
