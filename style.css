@@ -1,15 +1,13 @@
 
 /* @media screen and (min-width: 900px) { */
 body, html{
-    position: absolute;
     margin: 0px;
     padding: 0px;
-    width:100vw;
     font-family: 'Abel', sans-serif;
     font-size: 1rem;
 }
 .title {
-    padding: 20px;
+    padding: 1.25rem;
     height:100%;
     font-size: xx-large;
     font-family: 'Oswald', sans-serif;
@@ -29,12 +27,12 @@ body, html{
     display:flex;
     flex-grow: 4;
 }
+
 #grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin: 3.12rem 9.375rem 20rem 9.375rem;
-    column-gap: 10%;
-    row-gap: 5%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5rem 0rem 5rem 2rem; 
 }
 .bookCard, #newContainer {
     display: flex;
@@ -45,11 +43,10 @@ body, html{
     border: 1px solid lightgray;
     border-radius: 3%;
     background-color: rgb(255, 255, 244);
+    margin: 0rem 2rem 2rem 0rem;
 }
 #newContainer {
     justify-content: center;
-    /* grid-column-end: -1; */
-    /* grid-row-end: 5; */
 }
 #addNew {
     display: flex;
@@ -58,7 +55,7 @@ body, html{
     align-self: center;
     align-items: center;
     justify-content: center;
-    font-size: 70px;
+    font-size: 4.4rem;
     color: rgb(76, 93, 107);
     cursor:pointer;
 }
@@ -72,6 +69,7 @@ body, html{
     justify-content: center;
     font-size: 1.8rem;
     font-family: 'Oswald', sans-serif;
+    text-align: center;
 }
 #popupScreen {
     position: fixed;
@@ -87,11 +85,12 @@ body, html{
     position: fixed;
     display: flex;
     flex-wrap: wrap;
-    padding: 15px;
+    padding: 1.5rem;
     background-color: white;
     border-radius: 5%;
-    max-width: 20%;
-    min-height: 60%;  
+    width: 22%;
+    max-width: 80%;
+    min-height: 30rem;  
     justify-content: center; 
     align-content: center;
 }
@@ -103,16 +102,18 @@ body, html{
 }
 .formElement {
     width: 95%;
-    min-height: 30px;
+    min-height: 1.9rem;
     margin-top: 2%;
     margin-bottom: 2%;
     text-align: center;
+    font-family: 'Abel', sans-serif;
 }
 .newRead {
     margin-top:5%;
     max-width: 33%;
     align-content: center;
-    font-size: 19px;
+    font-size: 1.2rem;
+    
 }
 .button {
     margin-bottom: 10%;
@@ -123,7 +124,8 @@ body, html{
     margin-right: 4%;
     border: 1px solid lightgray;
     border-radius: 4%;
-    font-size: 15px;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 #add {
@@ -151,13 +153,25 @@ body, html{
 @media screen and (max-width: 26.563rem) {
 
     body, html {
-    font-size: 8px;
+    font-size: 11px;
     }
-    #grid {
+    /* #grid {
         grid-template-columns: 1fr 1fr;
         row-gap: 2rem;
         column-gap: 2rem;
         margin: auto 1rem 5rem 1rem;
-
+    } */
+    #popupBox {
+        width: 80%;
     }
+    /* .bookCard, #newContainer {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1.2rem;
+        height: 19rem;
+        width: 12rem;
+        border: 1px solid lightgray;
+        border-radius: 3%;
+        background-color: rgb(255, 255, 244);
+    } */
 }
