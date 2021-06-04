@@ -1,10 +1,19 @@
 
 /* @media screen and (min-width: 900px) { */
+:root {
+    --buttonColor: rgb(76, 93, 107);
+    --shadowColor: rgba(165, 165, 165, 0.534);
+    --borderColor: rgba(165, 165, 165, 0.534);
+    --redBtn: rgb(248, 192, 192);
+    --greenBtn: rgb(180, 230, 180);
+}
 body, html{
     margin: 0px;
     padding: 0px;
     font-family: 'Abel', sans-serif;
     font-size: 1rem;
+    background-color: rgba(255, 255, 244, 0.507);
+
 }
 .title {
     padding: 1.25rem;
@@ -21,40 +30,38 @@ body, html{
 .bookCard, #newContainer {
     display: flex;
     flex-wrap: wrap;
+    align-content: space-between;
     padding: 1.2rem;
     height: 19rem;
     width: 15rem;
-    border: 1px solid lightgray;
+    border: 1px solid rgba(165, 165, 165, 0.534);
     border-radius: 3%;
-    background-color: rgb(255, 255, 244);
+    background-color: white;
     margin: 0rem 2rem 2rem 0rem;
+    box-shadow: -1px 3px 3px 1px rgba(165, 165, 165, 0.534);
 }
 #newContainer {
     justify-content: center;
+    align-content: center;
 }
 #addNew {
-    display: flex;
     height: 6.8rem;
     width: 6.8rem;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
     font-size: 4.4rem;
     color: rgb(76, 93, 107);
     cursor:pointer;
 }
 .bookAttr {
-    display: inline-block;
-    padding-bottom: 5%;
     width: 100%;
-
+    padding: 0.1rem 0rem 0.1rem 1.5rem;
 }
 #bookTitle {
     justify-content: center;
     font-size: 1.8rem;
     font-family: 'Oswald', sans-serif;
     text-align: center;
-    margin-top: -1rem;
+    margin-top: -2.5rem;
+    padding: 0rem;
 }
 #popupScreen {
     position: fixed;
@@ -84,6 +91,7 @@ body, html{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-content: space-around;
 }
 .formElement {
     width: 95%;
@@ -98,7 +106,6 @@ body, html{
     max-width: 33%;
     align-content: center;
     font-size: 1.2rem;
-    
 }
 .button {
     margin-bottom: 10%;
@@ -114,16 +121,16 @@ body, html{
     cursor: pointer;
 }
 #add {
-    background-color: rgb(180, 230, 180);
+    background-color: var(--greenBtn);
 }
 #close {
-    background-color: rgb(248, 192, 192);
+    background-color: var(--redBtn);
 }
 .deleteButton {
     width: 1.2rem;
     height: 1.2rem;
     position: relative;
-    left: 14rem;
+    left: 14.1rem;
     bottom: 0.3rem;
     cursor: pointer;
 }
@@ -133,9 +140,30 @@ body, html{
 .deleteButton:focus {
     outline: none;
 }
+.readBtn {
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    border-radius: 7%;
+    background-color: var(--redBtn);
+    width: max-content;
+    height: max-content;
+    padding: 0rem 0.3rem;
+    margin: 0rem 0rem 1rem 1.3rem;
+    cursor: pointer;
+}
+.isReadBtn {
+    background-color: var(--greenBtn);
+}
+.readCard{
+    background-color: rgba(245, 245, 245, 0.514);
+    box-shadow: inset -1.5px 3px 3px 0px rgba(165, 165, 165, 0.534);
+}
 
 /* } */
-@media screen and (max-width: 26.563rem) {
+@media screen and (max-width: 41.25rem) {
 
     body, html {
     font-size: 11px;
@@ -147,16 +175,25 @@ body, html{
         padding: 2.5rem 0rem 2.5rem 1rem; 
     }
     .bookCard, #newContainer {
+        justify-content: center;
         padding: 1rem;
         height: 13rem;
         width: 9rem;
         margin: 0rem 1rem 1rem 0rem;
     }
+    .bookAttr{
+        text-align: center;
+        padding: 0px;
+    }
+    .readBtn{
+        margin: 0px;
+    }
     #bookTitle {
-        font-size: 1.4rem;
+        margin-top: -1rem;
+        font-size: 1.2rem;
     }
     .deleteButton {
-        left: 8.2rem;
+        left: 4.3rem;
         bottom: 0.3rem;
     }
 }

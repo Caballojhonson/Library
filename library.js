@@ -42,9 +42,8 @@ function makeCard(i) {
     const bookAuthor = document.createElement('div');
     const bookPages = document.createElement('div');
     const bookRead = document.createElement('div');
-    const checkbox = document.createElement('input')
 
-    bookDelete.classList.add('bookAttr', 'deleteButton');
+    bookDelete.classList.add('deleteButton');
     bookDelete.setAttribute('src', 'icons/remove.png');
     bookDelete.setAttribute('onclick', 'removeBook(this)')
     bookCard.setAttribute('data-index', i);
@@ -53,10 +52,8 @@ function makeCard(i) {
     bookTitle.id = 'bookTitle';
     bookAuthor.classList.add('bookAttr');
     bookPages.classList.add('bookAttr');
-    bookRead.classList.add('bookAttr');
-    checkbox.classList.add('checkbox')
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('onclick', 'isRead(this)')
+    bookRead.classList.add('readBtn');
+    bookRead.setAttribute('onclick', 'isRead(this)')
 
     bookTitle.textContent = library[i].title;
     bookAuthor.textContent = ('Written by ' + library[i].author);
@@ -69,8 +66,11 @@ function makeCard(i) {
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(bookPages);
     bookCard.appendChild(bookRead);
-    bookRead.appendChild(checkbox);
 
+    if(library[i].read == 'Read') {
+        bookCard.classList.add('bookCard', 'readCard');
+        bookRead.classList.add('readBtn', 'isReadBtn')
+    }
 }
 
 function populateGrid() {
@@ -126,20 +126,35 @@ function removeBook(btn) {
 }
 
 function isRead(book) {
-    const index = book.parentNode.parentNode.getAttribute('data-index');
-    const cardCheckboxes = document.querySelectorAll('.checkbox');
+    const index = book.parentNode.getAttribute('data-index');
 
-    if (book.checked == true) {
-        library[index].read = 'Read';
-    } else {
+    if (library[index].read == 'Read') {
         library[index].read = 'Unread';
-    }
-    for (let i = 0; i < cardCheckboxes.length; i++) {
-        if (library[i].read == 'Read') {
-            cardCheckboxes[i].setAttribute('checked', '')
-        }
+        storeLocally();
+        populateGrid(); 
+        return false;
+    }else if (library[index].read == 'Unread') {
+        library[index].read = 'Read';
+        storeLocally();
+        populateGrid(); 
+        return true;
     }
 }
+// function isRead(book) {
+//     const index = book.parentNode.parentNode.getAttribute('data-index');
+//     const cardCheckboxes = document.querySelectorAll('.checkbox');
+
+//     if (book.checked == true) {
+//         library[index].read = 'Read';
+//     } else {
+//         library[index].read = 'Unread';
+//     }
+//     for (let i = 0; i < cardCheckboxes.length; i++) {
+//         if (library[i].read == 'Read') {
+//             cardCheckboxes[i].setAttribute('checked', '')
+//         }
+//     }
+// }
 
 function storeLocally() {
     localStorage.setItem('Book', JSON.stringify(library));
