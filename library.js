@@ -57,7 +57,7 @@ function makeCard(i) {
 
     bookTitle.textContent = library[i].title;
     bookAuthor.textContent = ('Written by ' + library[i].author);
-    bookPages.textContent = library[i].pages + ' pages long';
+    bookPages.textContent = pageFormat(library[i].pages) + ' pages long';
     bookRead.textContent = library[i].read;
 
     bookGrid.appendChild(bookCard);
@@ -77,6 +77,7 @@ function populateGrid() {
 
     resetGrid();
     getFromSorage();
+    getStats();
 
     for (let i = 0; i < library.length; i++) {
         makeCard(i);
@@ -123,6 +124,7 @@ function removeBook(btn) {
     library.splice(index, 1);
     btn.parentNode.remove();
     storeLocally();
+    getStats();
 }
 
 function isRead(book) {
@@ -132,29 +134,16 @@ function isRead(book) {
         library[index].read = 'Unread';
         storeLocally();
         populateGrid(); 
+        getStats();
         return false;
     }else if (library[index].read == 'Unread') {
         library[index].read = 'Read';
         storeLocally();
-        populateGrid(); 
+        populateGrid();
+        getStats(); 
         return true;
     }
 }
-// function isRead(book) {
-//     const index = book.parentNode.parentNode.getAttribute('data-index');
-//     const cardCheckboxes = document.querySelectorAll('.checkbox');
-
-//     if (book.checked == true) {
-//         library[index].read = 'Read';
-//     } else {
-//         library[index].read = 'Unread';
-//     }
-//     for (let i = 0; i < cardCheckboxes.length; i++) {
-//         if (library[i].read == 'Read') {
-//             cardCheckboxes[i].setAttribute('checked', '')
-//         }
-//     }
-// }
 
 function storeLocally() {
     localStorage.setItem('Book', JSON.stringify(library));
@@ -169,4 +158,49 @@ function getFromSorage() {
     }
 }
 
+function getStats() {
+    
+    let bookEntries = library.length;
+    let readBooks = library.filter(book => book.read === 'Read').length;
+    let totalPages = library.map(book => parseInt(book.pages)).reduce((a, b) => a + b, 0);
+    let readPages = library.filter(book => book.read === 'Read').map(book => parseInt(book.pages)).reduce((a, b) => a + b, 0);
+    let bookPercent = (readBooks / bookEntries * 100).toFixed(0) + '%';
+    let pagePercent = (readPages / totalPages * 100).toFixed(0) + '%';
+
+    progressBars(bookEntries, readBooks, totalPages, readPages, bookPercent, pagePercent);
+}
+
+function pageFormat(n) {
+
+    let length = n.toString().length;
+
+    if(length >= 7) {
+        return (n / 1000000).toFixed(1) + 'M';
+    }else if(length >= 4) {
+        return (n / 1000).toFixed(1) + 'k';
+    }else{
+        return n;
+    }
+}
+
+function progressBars(bookEntries, readBooks, totalPages, readPages, bookPercent, pagePercent) {
+
+    const readBookNum = document.getElementById('readBookNum');
+    const bookNum = document.getElementById('bookNum');
+    const bookGreen = document.getElementById('bookGreen')
+    const readPageNum = document.getElementById('readPageNum');
+    const pageNum = document.getElementById('pageNum');
+    const pageGreen = document.getElementById('pageGreen');
+
+    readBookNum.textContent = readBooks;
+    bookNum.textContent = bookEntries;
+    bookGreen.textContent = bookPercent;
+    readPageNum.textContent = pageFormat(readPages);
+    pageNum.textContent = pageFormat(totalPages);
+    pageGreen.textContent = pagePercent;
+
+    bookGreen.style.width = bookPercent;
+    pageGreen.style.width = pagePercent;
+
+}
 populateGrid();

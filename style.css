@@ -1,11 +1,15 @@
 
-/* @media screen and (min-width: 900px) { */
+@keyframes progressBar {
+    from {width: 1%;}
+    to {width: }
+}
 :root {
     --buttonColor: rgb(76, 93, 107);
     --shadowColor: rgba(165, 165, 165, 0.534);
     --borderColor: rgba(165, 165, 165, 0.534);
     --redBtn: rgb(248, 192, 192);
     --greenBtn: rgb(180, 230, 180);
+    --headerColor: rgb(207, 205, 221);
 }
 body, html{
     margin: 0px;
@@ -13,7 +17,73 @@ body, html{
     font-family: 'Abel', sans-serif;
     font-size: 1rem;
     background-color: rgba(255, 255, 244, 0.507);
-
+}
+p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding: 0rem 0.15rem 0rem 0.15rem;
+    text-align: center;
+    font-size: 0.8rem;
+}
+header {
+    display: flex;
+    position: fixed;
+    z-index:9;
+}
+/* #infoContainer {
+    display: flex;
+    flex-grow: 2;
+    width: 5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--headerColor);
+}
+#infoBtn {
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+} */
+#statsContainer {
+    display: grid;
+    flex-grow: 3;
+    max-width: 25rem;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    row-gap: 0.1rem;
+    column-gap: 3rem;
+    background-color: var(--headerColor);
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    -webkit-border-bottom-right-radius: 15px;
+    -moz-border-radius-bottomright: 15px;
+    border-bottom-right-radius: 15px;
+}
+.progress {
+    display: flex;
+    align-items: center;
+    width: 10rem;
+}
+.bookRed {
+    display: flex;
+    background-color: var(--redBtn);
+    width: 100%;
+    height: 1rem;
+}
+#bookGreen, #pageGreen {
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0.1rem;
+    background-color: var(--greenBtn);
+    width: 1%;
+    height: 1rem;
+    font-size: 0.7rem;
+    animation-name: progressBar;
+    animation-duration: 2s;
+}
+.statTag {
+    margin: 0px;
+    grid-row: 1;
+    text-align: center;
 }
 .title {
     padding: 1.25rem;
@@ -25,7 +95,7 @@ body, html{
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 5rem 0rem 5rem 2rem; 
+    padding: 7rem 0rem 5rem 2rem; 
 }
 .bookCard, #newContainer {
     display: flex;
@@ -172,7 +242,7 @@ body, html{
         width: 80%;
     }
     #grid {
-        padding: 2.5rem 0rem 2.5rem 1rem; 
+        padding: 5rem 0rem 2.5rem 1rem; 
     }
     .bookCard, #newContainer {
         justify-content: center;
@@ -195,5 +265,8 @@ body, html{
     .deleteButton {
         left: 4.3rem;
         bottom: 0.3rem;
+    }
+    #infoContainer {
+        min-width:6rem;
     }
 }

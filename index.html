@@ -13,15 +13,7 @@
 </head>
 
 <body>
-    <header>
-        <div id="headerContainer">
-            <div id="infoBtn"></div>
-            <div id="stats">
-                <div id="entries"></div>
-                <div id="read"></div>
-            </div>
-        </div>
-    </header>
+
     <div id="popupScreen">
         <div id="popupBox">
             <div class="title">New Book</div>
@@ -37,7 +29,33 @@
         </div>
     </div>
 
-        <div id="grid"></div>
+    <header>
+        <!-- <div id="infoContainer">
+            <img id="infoBtn" src="icons/help.png">
+        </div> -->
+        <div id="statsContainer">
+
+            <h4 class="statTag">Books</h4>
+            <div class="progress">
+                <p id="readBookNum"></p>
+                <div class="bookRed">
+                    <div id="bookGreen"></div>
+                </div>
+                <p id="bookNum"></p>
+            </div>
+
+            <h4 class="statTag">Pages</h4>
+            <div class="progress">
+                <p id="readPageNum"></p>
+                <div class="bookRed">
+                    <div id="pageGreen"></div>
+                </div>
+                <p id="pageNum"></p>
+            </div>
+        </div>
+    </header>
+
+    <div id="grid"></div>
 
     <script src="library.js"></script>
 </body>
