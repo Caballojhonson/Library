@@ -7,11 +7,64 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-function getInput() {
+function validateForm() {
 
     let title = document.getElementById('newTitle').value;
     let author = document.getElementById('newAuthor').value;
     let pages = document.getElementById('newPages').value;
+
+    const messages = document.getElementsByClassName('formMessage')
+    const titleInput = document.getElementById('newTitle')
+    const authorInput = document.getElementById('newAuthor')
+    const pageInput = document.getElementById('newPages')
+
+    const titleMessage = document.createElement('p')
+    const authorMessage = document.createElement('p')
+    const pageMessage = document.createElement('p')
+
+    titleMessage.id = 'titleMessage';
+    authorMessage.id = 'authorMessage';
+    pageMessage.id = 'pageMessage';
+
+    let thereIsTitle = document.getElementById('titleMessage');
+    let thereIsauthor = document.getElementById('authorMessage');
+    let thereIsPage = document.getElementById('pageMessage');
+
+    titleMessage.textContent = 'Really? Well, that\'s a stupid name...';
+    authorMessage.textContent = 'Nobody has such a long name, come on...';
+    pageMessage.textContent = "Please enter the book's page number. NUMBER!";
+
+    if (title.length > 35 && !thereIsTitle) {
+        titleInput.after(titleMessage);
+        document.getElementById('newTitle').style.borderBottomColor = 'red';
+    } else if (title == '') {
+        document.getElementById('newTitle').style.borderBottomColor = 'red';
+    }
+    if (author.length > 25 && !thereIsauthor) {
+        authorInput.after(authorMessage);
+        document.getElementById('newAuthor').style.borderBottomColor = 'red';
+    } else if (author == '') {
+        document.getElementById('newAuthor').style.borderBottomColor = 'red';
+    }
+    if (isNaN(pages) && !thereIsPage) {
+        pageInput.after(pageMessage);
+        document.getElementById('newPages').style.borderBottomColor = 'red';
+    } else if (pages == '') {
+        document.getElementById('newPages').style.borderBottomColor = 'red';
+    }
+    if (title.length <= 35 && author.length <= 25 && !isNaN(pages) && title != '' && author != '' && pages != '') {
+        getInput(title, author, pages);
+    }
+}
+
+function resetFormStyle() {
+    document.getElementById('newTitle').style.borderBottomColor = 'light-dark(rgb(118, 118, 118), rgb(133, 133, 133))';
+    document.getElementById('newAuthor').style.borderBottomColor = 'light-dark(rgb(118, 118, 118), rgb(133, 133, 133))';
+    document.getElementById('newPages').style.borderBottomColor = 'light-dark(rgb(118, 118, 118), rgb(133, 133, 133))';
+}
+
+function getInput(title, author, pages) {
+
     let read = '';
     const checkbox = document.getElementById('checkbox');
 
@@ -21,10 +74,12 @@ function getInput() {
         read = 'Unread';
     }
 
+    resetFormStyle();
     addBook(title, author, pages, read);
     populateGrid();
     document.getElementById('popupForm').reset();
     closePop();
+
 }
 
 function addBook(title, author, pages, read) {
@@ -67,7 +122,7 @@ function makeCard(i) {
     bookCard.appendChild(bookPages);
     bookCard.appendChild(bookRead);
 
-    if(library[i].read == 'Read') {
+    if (library[i].read == 'Read') {
         bookCard.classList.add('bookCard', 'readCard');
         bookRead.classList.add('readBtn', 'isReadBtn')
     }
@@ -133,14 +188,14 @@ function isRead(book) {
     if (library[index].read == 'Read') {
         library[index].read = 'Unread';
         storeLocally();
-        populateGrid(); 
+        populateGrid();
         getStats();
         return false;
-    }else if (library[index].read == 'Unread') {
+    } else if (library[index].read == 'Unread') {
         library[index].read = 'Read';
         storeLocally();
         populateGrid();
-        getStats(); 
+        getStats();
         return true;
     }
 }
@@ -159,13 +214,20 @@ function getFromSorage() {
 }
 
 function getStats() {
-    
+
     let bookEntries = library.length;
     let readBooks = library.filter(book => book.read === 'Read').length;
     let totalPages = library.map(book => parseInt(book.pages)).reduce((a, b) => a + b, 0);
     let readPages = library.filter(book => book.read === 'Read').map(book => parseInt(book.pages)).reduce((a, b) => a + b, 0);
     let bookPercent = (readBooks / bookEntries * 100).toFixed(0) + '%';
     let pagePercent = (readPages / totalPages * 100).toFixed(0) + '%';
+console.log(bookPercent)
+    if (pagePercent == 'NaN%') {
+        pagePercent = 0 + '%';
+    }
+    if(bookPercent == 'NaN%') {
+        bookPercent = 0 + '%';
+    }
 
     progressBars(bookEntries, readBooks, totalPages, readPages, bookPercent, pagePercent);
 }
@@ -174,16 +236,18 @@ function pageFormat(n) {
 
     let length = n.toString().length;
 
-    if(length >= 7) {
+    if (length >= 7) {
         return (n / 1000000).toFixed(1) + 'M';
-    }else if(length >= 4) {
+    } else if (length >= 4) {
         return (n / 1000).toFixed(1) + 'k';
-    }else{
+    } else {
         return n;
     }
 }
 
 function progressBars(bookEntries, readBooks, totalPages, readPages, bookPercent, pagePercent) {
+
+
 
     const readBookNum = document.getElementById('readBookNum');
     const bookNum = document.getElementById('bookNum');
@@ -201,6 +265,7 @@ function progressBars(bookEntries, readBooks, totalPages, readPages, bookPercent
 
     bookGreen.style.width = bookPercent;
     pageGreen.style.width = pagePercent;
-
 }
+
+
 populateGrid();

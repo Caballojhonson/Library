@@ -17,6 +17,7 @@ body, html{
     font-family: 'Abel', sans-serif;
     font-size: 1rem;
     background-color: rgba(255, 255, 244, 0.507);
+    height: 100%;
 }
 p {
     margin-block-start: 0em;
@@ -30,18 +31,8 @@ header {
     position: fixed;
     z-index:9;
 }
-/* #infoContainer {
-    display: flex;
-    flex-grow: 2;
-    width: 5rem;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--headerColor);
-}
-#infoBtn {
-    height: 2rem;
-    width: 2rem;
-    cursor: pointer;
+/* input {
+    border-color: grey
 } */
 #statsContainer {
     display: grid;
@@ -67,18 +58,20 @@ header {
     background-color: var(--redBtn);
     width: 100%;
     height: 1rem;
+    border-radius: 50em;
 }
 #bookGreen, #pageGreen {
     display:flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 0.1rem;
     background-color: var(--greenBtn);
-    width: 1%;
+    width: 0%;
     height: 1rem;
     font-size: 0.7rem;
     animation-name: progressBar;
     animation-duration: 2s;
+    border-radius: 0% 50em 50em 0%;
+    text
 }
 .statTag {
     margin: 0px;
@@ -94,6 +87,7 @@ header {
 #grid {
     display: inline-flex;
     flex-wrap: wrap;
+    min-height: 85%;
     justify-content: center;
     padding: 7rem 0rem 5rem 2rem; 
 }
@@ -177,6 +171,9 @@ header {
     align-content: center;
     font-size: 1.2rem;
 }
+.formMessage {
+    /* color: red; */
+}
 .button {
     margin-bottom: 10%;
     margin-top: 5%;
@@ -231,6 +228,30 @@ header {
     background-color: rgba(245, 245, 245, 0.514);
     box-shadow: inset -1.5px 3px 3px 0px rgba(165, 165, 165, 0.534);
 }
+footer {
+    display: flex;
+    align-items: center;
+    background-color: rgb(15, 14, 29);
+    color: white;
+    height: 2.7rem;
+}
+#attribution {
+    font-size: 1.1rem;
+    margin-left: 5rem;
+}
+#odin {
+    color: white;
+    margin-right: auto;
+}
+#odin:focus {
+    outline: none;
+}
+#github {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 5rem;
+}
+
 
 /* } */
 @media screen and (max-width: 41.25rem) {
@@ -266,7 +287,10 @@ header {
         left: 4.3rem;
         bottom: 0.3rem;
     }
-    #infoContainer {
-        min-width:6rem;
+    #attribution {
+        margin-left: 2.5rem;
+    }
+    #github {
+        margin-right: 2.5rem;
     }
 }

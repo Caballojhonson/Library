@@ -23,16 +23,13 @@
                 <input class="formElement" id="newPages" type="text" placeholder="Page number" autocomplete="off">
                 <label class="formElement newRead" for="newRead">Check if read</label>
                 <input class="formElement newRead" id="checkbox" type="checkbox" name="read">
-                <button type="button" id="add" class="formElement button" onclick="getInput()">Add</button>
+                <button type="button" id="add" class="formElement button" onclick="validateForm()">Add</button>
                 <button type="button" id="close" class="formElement button" onclick="closePop()">Close</button>
             </form>
         </div>
     </div>
 
     <header>
-        <!-- <div id="infoContainer">
-            <img id="infoBtn" src="icons/help.png">
-        </div> -->
         <div id="statsContainer">
 
             <h4 class="statTag">Books</h4>
@@ -53,9 +50,20 @@
                 <p id="pageNum"></p>
             </div>
         </div>
+
     </header>
 
     <div id="grid"></div>
+
+    <footer>
+        <p id="attribution">By Caballo for &nbsp </p>
+        <a id="odin"
+            href="http://https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/library">The
+            Odin Project</a>
+        
+            <a href="https://github.com/Caballojhonson"><img id="github" src="icons/github.jpg" alt="Github logo"></a>
+        
+    </footer>
 
     <script src="library.js"></script>
 </body>
