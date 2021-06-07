@@ -31,9 +31,10 @@ header {
     position: fixed;
     z-index:9;
 }
-/* input {
-    border-color: grey
-} */
+input {
+    border: 0.1rem solid grey;
+    border-radius: 0.3em;
+}
 #statsContainer {
     display: grid;
     flex-grow: 3;
@@ -71,7 +72,6 @@ header {
     animation-name: progressBar;
     animation-duration: 2s;
     border-radius: 0% 50em 50em 0%;
-    text
 }
 .statTag {
     margin: 0px;
@@ -171,8 +171,8 @@ header {
     align-content: center;
     font-size: 1.2rem;
 }
-.formMessage {
-    /* color: red; */
+.errorMsg {
+    display: none;
 }
 .button {
     margin-bottom: 10%;

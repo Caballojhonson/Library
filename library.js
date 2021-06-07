@@ -1,3 +1,14 @@
+const grid = document.getElementById('grid');
+const popupScreen = document.getElementById('popupScreen')
+const popupForm = document.getElementById('popupForm')
+const titleField = document.getElementById('newTitle');
+const authorField = document.getElementById('newAuthor');
+const pageField = document.getElementById('newPages');
+const titleError = document.getElementById('titleError');
+const authorError = document.getElementById('authorError');
+const pageError = document.getElementById('pageError');
+const checkbox = document.getElementById('checkbox');
+
 let library = [];
 
 function Book(title, author, pages, read) {
@@ -9,64 +20,60 @@ function Book(title, author, pages, read) {
 
 function validateForm() {
 
-    let title = document.getElementById('newTitle').value;
-    let author = document.getElementById('newAuthor').value;
-    let pages = document.getElementById('newPages').value;
+    let titleValue = titleField.value;
+    let authorValue = authorField.value;
+    let pageValue = pageField.value;
 
-    const messages = document.getElementsByClassName('formMessage')
-    const titleInput = document.getElementById('newTitle')
-    const authorInput = document.getElementById('newAuthor')
-    const pageInput = document.getElementById('newPages')
-
-    const titleMessage = document.createElement('p')
-    const authorMessage = document.createElement('p')
-    const pageMessage = document.createElement('p')
-
-    titleMessage.id = 'titleMessage';
-    authorMessage.id = 'authorMessage';
-    pageMessage.id = 'pageMessage';
-
-    let thereIsTitle = document.getElementById('titleMessage');
-    let thereIsauthor = document.getElementById('authorMessage');
-    let thereIsPage = document.getElementById('pageMessage');
-
-    titleMessage.textContent = 'Really? Well, that\'s a stupid name...';
-    authorMessage.textContent = 'Nobody has such a long name, come on...';
-    pageMessage.textContent = "Please enter the book's page number. NUMBER!";
-
-    if (title.length > 35 && !thereIsTitle) {
-        titleInput.after(titleMessage);
-        document.getElementById('newTitle').style.borderBottomColor = 'red';
-    } else if (title == '') {
-        document.getElementById('newTitle').style.borderBottomColor = 'red';
+    if (titleValue.length > 35) {
+        titleError.style.display = 'block';
+         titleField.style.borderBottomColor = 'red';
+    } else if (titleValue === '') {
+        titleField.style.borderBottomColor = 'red';
+    }else{
+        titleField.style.borderBottomColor = 'grey';
+        titleError.style.display = 'none';
     }
-    if (author.length > 25 && !thereIsauthor) {
-        authorInput.after(authorMessage);
-        document.getElementById('newAuthor').style.borderBottomColor = 'red';
-    } else if (author == '') {
-        document.getElementById('newAuthor').style.borderBottomColor = 'red';
+
+    if (authorValue.length > 25) {
+        authorError.style.display = 'block';
+        authorField.style.borderBottomColor = 'red';
+    } else if (authorValue === '') {
+        authorField.style.borderBottomColor = 'red';
+    }else{
+        authorField.style.borderBottomColor = 'grey';
+        authorError.style.display = 'none';
     }
-    if (isNaN(pages) && !thereIsPage) {
-        pageInput.after(pageMessage);
-        document.getElementById('newPages').style.borderBottomColor = 'red';
-    } else if (pages == '') {
-        document.getElementById('newPages').style.borderBottomColor = 'red';
+
+    if (isNaN(pageValue)) {
+        pageError.style.display = 'block';
+        pageField.style.borderBottomColor = 'red';
+    } else if (pageValue === '') {
+        pageField.style.borderBottomColor = 'red';
+    }else{
+        pageField.style.borderBottomColor = 'grey';
+        pageError.style.display = 'none';
     }
-    if (title.length <= 35 && author.length <= 25 && !isNaN(pages) && title != '' && author != '' && pages != '') {
-        getInput(title, author, pages);
+
+    if (titleValue.length <= 35 && authorValue.length <= 25 && !isNaN(pageValue) && titleValue != '' && authorValue != '' && pageValue != '') {
+        getInput(titleValue, authorValue, pageValue);
     }
 }
 
-function resetFormStyle() {
-    document.getElementById('newTitle').style.borderBottomColor = 'light-dark(rgb(118, 118, 118), rgb(133, 133, 133))';
-    document.getElementById('newAuthor').style.borderBottomColor = 'light-dark(rgb(118, 118, 118), rgb(133, 133, 133))';
-    document.getElementById('newPages').style.borderBottomColor = 'light-dark(rgb(118, 118, 118), rgb(133, 133, 133))';
+function resetForm() {
+
+    popupForm.reset();
+    titleField.style.borderBottomColor = 'grey';
+    authorField.style.borderBottomColor = 'grey';
+    pageField.style.borderBottomColor = 'grey';
+
+    titleError.style.display = 'none';
+    authorError.style.display = 'none';
+    pageError.style.display = 'none';
 }
 
 function getInput(title, author, pages) {
 
     let read = '';
-    const checkbox = document.getElementById('checkbox');
 
     if (checkbox.checked == true) {
         read = 'Read';
@@ -74,10 +81,9 @@ function getInput(title, author, pages) {
         read = 'Unread';
     }
 
-    resetFormStyle();
     addBook(title, author, pages, read);
     populateGrid();
-    document.getElementById('popupForm').reset();
+    resetForm();
     closePop();
 
 }
@@ -88,8 +94,6 @@ function addBook(title, author, pages, read) {
 }
 
 function makeCard(i) {
-
-    const bookGrid = document.getElementById('grid');
 
     const bookDelete = document.createElement('img')
     const bookCard = document.createElement('div');
@@ -115,12 +119,8 @@ function makeCard(i) {
     bookPages.textContent = pageFormat(library[i].pages) + ' pages long';
     bookRead.textContent = library[i].read;
 
-    bookGrid.appendChild(bookCard);
-    bookCard.appendChild(bookDelete);
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookAuthor);
-    bookCard.appendChild(bookPages);
-    bookCard.appendChild(bookRead);
+    grid.appendChild(bookCard);
+    bookCard.append(bookDelete, bookTitle, bookAuthor, bookPages, bookRead)
 
     if (library[i].read == 'Read') {
         bookCard.classList.add('bookCard', 'readCard');
@@ -138,16 +138,15 @@ function populateGrid() {
         makeCard(i);
     }
     const newContainer = document.getElementById('newContainer');
-    document.getElementById('grid').appendChild(newContainer);
+    grid.appendChild(newContainer);
 }
 
 function resetGrid() {
 
-    document.getElementById('grid').innerHTML = '';
+    grid.innerHTML = '';
 
     const newContainer = document.createElement('div');
     const newBtn = document.createElement('img');
-    const grid = document.getElementById('grid');
 
     newContainer.id = 'newContainer';
     newBtn.id = 'addNew';
@@ -160,26 +159,31 @@ function resetGrid() {
 }
 
 function openPop() {
-    document.getElementById('popupScreen').style.display = 'flex';
+    popupScreen.style.display = 'flex';
 }
 
 function closePop() {
-    document.getElementById('popupScreen').style.display = 'none';
+    popupScreen.style.display = 'none';
 }
 
 window.onclick = function (event) {
-    let modal = document.getElementById('popupScreen');
-    if (event.target == modal) {
+    if (event.target == popupScreen) {
         closePop();
     }
 }
 
+popupForm.addEventListener('keyup', function(event) {
+        if(event.code === 'Enter'){
+            document.getElementById('add').click()
+        }
+    })
+
 function removeBook(btn) {
     let index = btn.parentNode.getAttribute('data-index')
     library.splice(index, 1);
-    btn.parentNode.remove();
     storeLocally();
     getStats();
+    btn.parentNode.remove();
 }
 
 function isRead(book) {
@@ -221,11 +225,11 @@ function getStats() {
     let readPages = library.filter(book => book.read === 'Read').map(book => parseInt(book.pages)).reduce((a, b) => a + b, 0);
     let bookPercent = (readBooks / bookEntries * 100).toFixed(0) + '%';
     let pagePercent = (readPages / totalPages * 100).toFixed(0) + '%';
-console.log(bookPercent)
+
     if (pagePercent == 'NaN%') {
         pagePercent = 0 + '%';
     }
-    if(bookPercent == 'NaN%') {
+    if (bookPercent == 'NaN%') {
         bookPercent = 0 + '%';
     }
 
@@ -246,8 +250,6 @@ function pageFormat(n) {
 }
 
 function progressBars(bookEntries, readBooks, totalPages, readPages, bookPercent, pagePercent) {
-
-
 
     const readBookNum = document.getElementById('readBookNum');
     const bookNum = document.getElementById('bookNum');
