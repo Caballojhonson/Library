@@ -23,10 +23,14 @@
                 <p class ="errorMsg" id="authorError">Nobody has such a long name, come on...</p>
                 <input class="formElement" id="newPages" type="text" placeholder="Page number" autocomplete="off">
                 <p class ="errorMsg"id="pageError">Please enter the book's page number. NUMBER!</p>
-                <label class="formElement newRead" for="newRead">Check if read</label>
-                <input class="formElement newRead" id="checkbox" type="checkbox" name="read">
-                <button type="button" id="add" class="formElement button" onclick="validateForm()">Add</button>
-                <button type="button" id="close" class="formElement button" onclick="closePop()">Close</button>
+                <div id="checkboxWrapper">
+                    <label class="formElement newRead" for="newRead">Check if read:</label>
+                    <input class="formElement newRead" id="checkbox" type="checkbox" name="read">
+                </div>
+                <div id="buttonWrapper">
+                    <button type="button" id="add" class="formElement button" onclick="validateForm()">Add</button>
+                    <button type="button" id="close" class="formElement button" onclick="closePop()">Close</button>
+                </div>
             </form>
         </div>
     </div>

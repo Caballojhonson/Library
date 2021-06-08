@@ -11,11 +11,12 @@ const checkbox = document.getElementById('checkbox');
 
 let library = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, index) {
     this.title = title
     this.author = author
     this.pages = pages
     this.read = read
+    this.index = index
 }
 
 function validateForm() {
@@ -74,6 +75,7 @@ function resetForm() {
 function getInput(title, author, pages) {
 
     let read = '';
+    let index = library.length;
 
     if (checkbox.checked == true) {
         read = 'Read';
@@ -81,15 +83,15 @@ function getInput(title, author, pages) {
         read = 'Unread';
     }
 
-    addBook(title, author, pages, read);
+    addBook(title, author, pages, read, index);
     populateGrid();
     resetForm();
     closePop();
 
 }
 
-function addBook(title, author, pages, read) {
-    library.push(new Book(title, author, pages, read))
+function addBook(title, author, pages, read, index) {
+    library.push(new Book(title, author, pages, read, index))
     storeLocally();
 }
 
@@ -105,7 +107,7 @@ function makeCard(i) {
     bookDelete.classList.add('deleteButton');
     bookDelete.setAttribute('src', 'icons/remove.png');
     bookDelete.setAttribute('onclick', 'removeBook(this)')
-    bookCard.setAttribute('data-index', i);
+    bookCard.setAttribute('data-index', library[i].index);
     bookCard.classList.add('bookCard');
     bookTitle.classList.add('bookAttr');
     bookTitle.id = 'bookTitle';
@@ -179,28 +181,30 @@ popupForm.addEventListener('keyup', function(event) {
     })
 
 function removeBook(btn) {
-    let index = btn.parentNode.getAttribute('data-index')
-    library.splice(index, 1);
+    let cardIndex = btn.parentNode.getAttribute('data-index');
+    let libraryIndex = library.findIndex(book => book.index == cardIndex)
+    library.splice(libraryIndex, 1);
     storeLocally();
     getStats();
     btn.parentNode.remove();
+    console.log(libraryIndex)
+    console.log(cardIndex)
 }
 
 function isRead(book) {
-    const index = book.parentNode.getAttribute('data-index');
+    const cardIndex = book.parentNode.getAttribute('data-index');
+    let libraryIndex = library.findIndex(book => book.index == cardIndex);
 
-    if (library[index].read == 'Read') {
-        library[index].read = 'Unread';
+    if (library[libraryIndex].read == 'Read') {
+        library[libraryIndex].read = 'Unread';
         storeLocally();
         populateGrid();
         getStats();
-        return false;
-    } else if (library[index].read == 'Unread') {
-        library[index].read = 'Read';
+    } else if (library[libraryIndex].read == 'Unread') {
+        library[libraryIndex].read = 'Read';
         storeLocally();
         populateGrid();
         getStats();
-        return true;
     }
 }
 
